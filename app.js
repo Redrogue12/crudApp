@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 
 require('dotenv').config()
 
+const PORT = process.env.PORT || 3000
 
 // Init App
 const app = express()
@@ -61,7 +62,7 @@ app.post('/', (req, res) => {
 })
 
 // Start Server
-app.listen('3000', () => {
+app.listen(PORT, () => {
   console.log("server started on port 3000")
   
 })
