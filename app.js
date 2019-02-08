@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+
 require('dotenv').config()
 
 
@@ -12,12 +13,10 @@ const app = express()
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
-// Load View Engine
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'pug')
-
 // Set Public Folder
 app.use(express.static(path.join(__dirname, 'public')))
+
+app.set('view engine', 'ejs');
 
 // DB Config
 const db = process.env.DB_URL
@@ -45,14 +44,7 @@ app.get('/', (req, res) => {
   })
 })
 
-// Add Route
-app.get('/articles/add', (req, res) => {
-  res.render('add_article', {
-    title: 'Add Article'
-  })
-})
-
-app.post('/articles/add', (req, res) => {
+app.post('/', (req, res) => {
   let article = new Article()
   article.title = req.body.title
   article.author = req.body.author
