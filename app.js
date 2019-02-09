@@ -61,6 +61,17 @@ app.post('/', (req, res) => {
   })
 })
 
+app.delete('/:id', (req, res) => {
+  let query = {_id: req.params.id}
+  Article.deleteOne(query, err => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send('Success')
+    }
+  })
+})
+
 // Start Server
 app.listen(PORT, () => {
   console.log(`server started on port ${PORT}`)
