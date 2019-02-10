@@ -26,3 +26,7 @@ main {
 .column {
   width: 50%;
 }
+
+textarea {
+  min-height: 150px;
+}
