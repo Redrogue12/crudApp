@@ -16,13 +16,14 @@
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">CRUD App</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <a class="navbar-brand text-muted" href="/">CRUD App</a>
+    <div id="navItems">
+      <p>By: Edgar X. González Cortés</p>
+      <p>Y00-26-3142</p>
+      <p>exgc12@gmail.com</p>
+    </div>
   </nav>
-
+  
   <div class=container>
     <div class="container">
       <form method="POST" action='/edit/<%= article.id %>'>
@@ -60,12 +61,6 @@
     </div>
     </div>
   </div>
-
-  <footer id="footer" style="position: absolute">
-    <p>By: Edgar X. González Cortés</p>
-    <p>Y00-26-3142</p>
-    <p>exgc12@gmail.com</p>
-  </footer>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
