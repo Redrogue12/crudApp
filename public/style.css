@@ -33,4 +33,22 @@ textarea {
 
 #appInfo {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.link:hover {
+  text-decoration: none;
+}
+
+.logo {
+  height: 15%;
+  width: 15%;
+  align-self: center
+}
+
+#logos {
+  display: flex;
+  justify-content: space-evenly;
 }
