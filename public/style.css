@@ -30,3 +30,7 @@ main {
 textarea {
   min-height: 150px;
 }
+
+#appInfo {
+  margin-top: 20px;
+}
