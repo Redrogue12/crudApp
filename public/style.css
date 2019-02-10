@@ -2,15 +2,11 @@ body, html, main {
   height: 100%;
 }
 
-nav {
-  display: flex;
+.navbar-nav {
+  margin-left: 100px;
+  width: 80%;
+  display: flex !important;
   justify-content: space-between !important;
-}
-
-#navItems {
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
 }
 
 main {
@@ -53,6 +49,12 @@ textarea {
   justify-content: space-evenly;
 }
 
+@media only screen and (max-width: 992px) {
+  .navbar-nav {
+    margin-left: 0;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .double {
     margin: 0 auto;
@@ -62,4 +64,6 @@ textarea {
   .column {
     width: 100%;
   }
+
+  
 }
