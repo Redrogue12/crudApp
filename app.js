@@ -2,9 +2,14 @@ const express = require('express')
 const path = require('path')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const createError = require('http-errors')
 
 require('dotenv').config()
 
+// Get Routes
+const articles = require('./routes/articles.js')
+
+// Set Port
 const PORT = process.env.PORT || 3000
 
 // Init App
@@ -17,8 +22,12 @@ app.use(bodyParser.json())
 // Set Public Folder
 app.use(express.static(path.join(__dirname, 'public')))
 
+//  View Engine
 app.engine('ejs', require('express-ejs-extend'));
 app.set('view engine', 'ejs');
+
+// Use Routes
+app.use('/', articles);
 
 // DB Config
 const db = process.env.DB_URL
@@ -29,86 +38,9 @@ mongoose
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
 
-// Bring in Models
-let Article = require('./models/article')
-
-// Home Route
-app.get('/', (req, res) => {
-  Article.find({}, (err, articles) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render('index', {
-        title: 'Articles',
-        articles: articles
-      })
-    }
-  })
-})
-
-app.post('/', (req, res) => {
-  let article = new Article()
-  article.title = req.body.title
-  article.author = req.body.author
-  article.body = req.body.body
-
-  article.save(err => {
-    if (err) {
-      console.log(err);
-      return
-    } else {
-      res.redirect('/')
-    }
-  })
-})
-
-app.get('/edit/:id', (req, res) => {
-  let query = { _id: req.params.id }
-  Article.findOne({ _id: query})
-    .exec((err, article) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render('editArticle', {
-        article
-      })
-    }
-  })
-})
-
-app.post('/edit/:id', (req, res) => {
-  let article = {}
-  article.title = req.body.title
-  article.author = req.body.author
-  article.body = req.body.body
-  
-  let query = { _id: req.params.id }
-
-  Article.update(query, article, (err, raw) => {
-    if (err) {
-      console.log(err);
-      return
-    } else {
-      console.log(raw)
-      res.redirect('/')
-    }
-  })
-})
-
-
-app.delete('/:id', (req, res) => {
-  let query = {_id: req.params.id}
-  Article.deleteOne(query, err => {
-    if (err) {
-      console.log(err)
-    } else {
-      res.send('Success')
-    }
-  })
-})
-
 // Start Server
 app.listen(PORT, () => {
   console.log(`server started on port ${PORT}`)
-  
 })
+
+module.exports = app;
