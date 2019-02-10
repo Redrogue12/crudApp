@@ -44,9 +44,21 @@ textarea {
   align-self: center
 }
 
+.logoBig {
+  height: 25%;
+  width: 25%;
+  align-self: center
+}
+
 #logos {
   display: flex;
   justify-content: space-evenly;
+}
+
+.errorImg {
+  background-image: url(/img/bluescreen.jpg);
+  color: white;
+  height: 92vh;
 }
 
 @media only screen and (max-width: 992px) {
@@ -65,5 +77,4 @@ textarea {
     width: 100%;
   }
 
-  
 }
