@@ -2,12 +2,27 @@ body, html, main {
   height: 100%;
 }
 
-footer {
+nav {
+  display: flex;
+  justify-content: space-between !important;
+}
+
+#navItems {
+  width: 100%;
   display: flex;
   justify-content: space-evenly;
-  border-top: 1px solid rgba(0,0,0,.1);
-  position: relative;
-  bottom: 0;
-  width: 100%;
-  margin-top: 25px;
+}
+
+main {
+  margin-top: 20px;
+  margin-bottom: 100px;
+}
+
+.double {
+  margin: 0 auto;
+  display: flex;
+}
+
+.column {
+  width: 50%;
 }
