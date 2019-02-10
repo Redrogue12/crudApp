@@ -17,6 +17,7 @@ app.use(bodyParser.json())
 // Set Public Folder
 app.use(express.static(path.join(__dirname, 'public')))
 
+app.engine('ejs', require('express-ejs-extend'));
 app.set('view engine', 'ejs');
 
 // DB Config
