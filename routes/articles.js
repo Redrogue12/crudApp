@@ -55,24 +55,24 @@ router.get('/edit/:id', (req, res) => {
     })
 })
 
-router.post('/edit/:id', (req, res) => {
-  let article = {}
-  article.title = req.body.title
-  article.author = req.body.author
-  article.body = req.body.body
+// router.post('/edit/:id', (req, res) => {
+//   let article = {}
+//   article.title = req.body.title
+//   article.author = req.body.author
+//   article.body = req.body.body
 
-  let query = { _id: req.params.id }
+//   let query = { _id: req.params.id }
 
-  Article.update(query, article, (err, raw) => {
-    if (err) {
-      console.log(err);
-      return
-    } else {
-      console.log(raw)
-      res.redirect('/')
-    }
-  })
-})
+//   Article.update(query, article, (err, raw) => {
+//     if (err) {
+//       console.log(err);
+//       return
+//     } else {
+//       console.log(raw)
+//       res.redirect('/')
+//     }
+//   })
+// })
 
 router.delete('/:id', (req, res) => {
   let query = { _id: req.params.id }
@@ -84,21 +84,5 @@ router.delete('/:id', (req, res) => {
     }
   })
 })
-
-// catch 404 and forward to error handler
-router.use(function (req, res, next) {
-  next(createError(404));
-});
-
-// error handler
-router.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
 
 module.exports = router;
