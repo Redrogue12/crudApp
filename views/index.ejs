@@ -1,137 +1,85 @@
-<!doctype html>
-<html lang="en">
+<%# views/index.ejs %>
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-    crossorigin="anonymous">
-  <link rel="stylesheet" href="style.css">
-  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <title>CRUD App</title>
-</head>
-
-<body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand text-muted" href="/">CRUD App</a>
+<% extend('layout') %>
     
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <p>By: Edgar X. González Cortés</p>
-        </li>
-        <li class="nav-item">
-          <p>Y00-26-3142</p>
-        </li>
-        <li class="nav-item">
-          <p>exgc12@gmail.com</p>
-        </li>
-        <li class="nav-item">
-          <a class="link" target="_blank" href="https://github.com/Redrogue12/crudApp">Github</a>
+<main class="container">
+  <div class="double">
+    <div class="container column">
+      <div class="container">
+        <form method="POST" action='/'>
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" name="title" class="form-control" id="title" placeholder="Article's Title">
           </div>
-        </li>
-      </ul>
-    </div>
-  </nav>
-    
-    <main class="container">
-
-      <div class="double">
-        <div class="container column">
-          <div class="container">
-            <form method="POST" action='/'>
-              <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" name="title" class="form-control" id="title" placeholder="Article's Title">
-              </div>
-              <div class="form-group">
-                <label for="author">Author</label>
-                <input type="text" name="author" class="form-control" id="author" placeholder="Article's Author">
-              </div>
-              <div class="form-group">
-                <label for="body">Body</label>
-                <textarea name="body" class="form-control" id="body" placeholder="Article's Body"></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+          <div class="form-group">
+            <label for="author">Author</label>
+            <input type="text" name="author" class="form-control" id="author" placeholder="Article's Author">
           </div>
+          <div class="form-group">
+            <label for="body">Body</label>
+            <textarea name="body" class="form-control" id="body" placeholder="Article's Body"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
       </div>
-      <div class="column" id="appInfo">
-        <div>
-          <p class="text-muted">
-            This web app was built using JavaScript front to back using Node/Express for the backend server, Mongo/Mongoose for
-            the database management while it is hosted in mLab and Bootstrap for the frontend components.
-          </p>
-          <p class="text-muted">
-            It enables the user to write an article, edit and delete them.
-          </p>
-        </div>
-        <div id="logos">
-          <img class="logo" src="/img/js.svg" alt="JavaScript Logo">
-          <img class="logo" src="/img/node.svg" alt="Nodejs Logo">
-          <img class="logo" src="/img/mongodb.svg" alt="MongoDB Logo">
-          <img class="logo" src="/img/mlab.svg" alt="mLab Logo">
-        </div>
-      </div>
+  </div>
+  <div class="column" id="appInfo">
+    <div>
+      <p class="text-muted">
+        This web app was built using JavaScript front to back using Node/Express for the backend server, Mongo/Mongoose for
+        the database management while it is hosted in mLab and Bootstrap for the frontend components.
+      </p>
+      <p class="text-muted">
+        It enables the user to write an article, edit and delete them.
+      </p>
     </div>
+    <div id="logos">
+      <img class="logo" src="/img/js.svg" alt="JavaScript Logo">
+      <img class="logo" src="/img/node.svg" alt="Nodejs Logo">
+      <img class="logo" src="/img/mongodb.svg" alt="MongoDB Logo">
+      <img class="logo" src="/img/mlab.svg" alt="mLab Logo">
+    </div>
+  </div>
+</div>
 
-    <hr/>
+<hr/>
 
-      <h1>
-        <%= title  %>
-      </h1>
-      <ul class="list-group">
-        <% articles.forEach(article => { %>
-        <li class="list-group-item">
-          <h3>
-            <%= article.title %>
-          </h3>
-          <p>
-            <%= article.body %>
-          </p>
-          <p>
-            <%= article.author %>
-          </p>
-          <script type="text/javascript">
-            document.addEventListener('DOMContentLoaded', () => {
+  <h1>
+    <%= title  %>
+  </h1>
+  <ul class="list-group">
+    <% articles.forEach(article => { %>
+    <li class="list-group-item">
+      <h3>
+        <%= article.title %>
+      </h3>
+      <p>
+        <%= article.body %>
+      </p>
+      <p>
+        <%= article.author %>
+      </p>
+      <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
 
-              let delBtn = document.getElementById('deleteBtn')
-              delBtn.addEventListener('click', () => {
-                $.ajax({
-                  type: 'DELETE',
-                  url: '/<%= article.id %>',
-                  success: res => {
-                    window.location.href='/'
-                  },
-                  error: err => {
-                    console.log(err);
-                  }
-                })
-              })
-            }, false);
-          </script>
-          <a class="btn btn-warning" href="/edit/<%= article.id %>" >Edit</a>
-          <a class="btn btn-danger" id="deleteBtn">Delete</a>
-        </li>
-        <% }) %>
-      </ul>
-  </main>
-
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-    crossorigin="anonymous"></script>
-</body>
-
-</html>
+          let delBtn = document.getElementById('deleteBtn')
+          delBtn.addEventListener('click', () => {
+            $.ajax({
+              type: 'DELETE',
+              url: '/<%= article.id %>',
+              success: res => {
+                window.location.href='/'
+              },
+              error: err => {
+                console.log(err);
+              }
+            })
+          })
+        }, false);
+      </script>
+      <a class="btn btn-warning" href="/edit/<%= article.id %>" >Edit</a>
+      <a class="btn btn-danger" id="deleteBtn">Delete</a>
+    </li>
+    <% }) %>
+  </ul>
+</main>
