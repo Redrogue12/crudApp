@@ -61,6 +61,40 @@ app.post('/', (req, res) => {
   })
 })
 
+app.get('/edit/:id', (req, res) => {
+  let query = { _id: req.params.id }
+  Article.findOne({ _id: query})
+    .exec((err, article) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('editArticle', {
+        article
+      })
+    }
+  })
+})
+
+app.post('/edit/:id', (req, res) => {
+  let article = {}
+  article.title = req.body.title
+  article.author = req.body.author
+  article.body = req.body.body
+  
+  let query = { _id: req.params.id }
+
+  Article.update(query, article, (err, raw) => {
+    if (err) {
+      console.log(err);
+      return
+    } else {
+      console.log(raw)
+      res.redirect('/')
+    }
+  })
+})
+
+
 app.delete('/:id', (req, res) => {
   let query = {_id: req.params.id}
   Article.deleteOne(query, err => {
