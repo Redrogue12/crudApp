@@ -1,4 +1,13 @@
+body, html, main {
+  height: 100%;
+}
+
 footer {
   display: flex;
-  justify-content: space-evenly
+  justify-content: space-evenly;
+  border-top: 1px solid rgba(0,0,0,.1);
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  margin-top: 25px;
 }
