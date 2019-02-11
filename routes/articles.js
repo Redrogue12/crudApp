@@ -55,24 +55,24 @@ router.get('/edit/:id', (req, res) => {
     })
 })
 
-// router.post('/edit/:id', (req, res) => {
-//   let article = {}
-//   article.title = req.body.title
-//   article.author = req.body.author
-//   article.body = req.body.body
+router.post('/edit/:id', (req, res) => {
+  let article = {}
+  article.title = req.body.title
+  article.author = req.body.author
+  article.body = req.body.body
 
-//   let query = { _id: req.params.id }
+  let query = { _id: req.params.id }
 
-//   Article.update(query, article, (err, raw) => {
-//     if (err) {
-//       console.log(err);
-//       return
-//     } else {
-//       console.log(raw)
-//       res.redirect('/')
-//     }
-//   })
-// })
+  Article.update(query, article, (err, raw) => {
+    if (err) {
+      console.log(err);
+      return
+    } else {
+      console.log(raw)
+      res.redirect('/')
+    }
+  })
+})
 
 router.delete('/:id', (req, res) => {
   let query = { _id: req.params.id }
