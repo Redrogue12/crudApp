@@ -9,6 +9,10 @@ body, html, main {
   justify-content: space-between !important;
 }
 
+div > ul > li > p {
+  margin: 0;
+}
+
 main {
   margin-top: 20px;
   margin-bottom: 100px;
